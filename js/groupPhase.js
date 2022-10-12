@@ -5,6 +5,7 @@ function seeTeams() {
 
 // variáveis de tempo, controle de rodada, das equipes e os times ordenados
 const timer = ms => new Promise(res => setTimeout(res, ms));
+const msTimer = 10;
 let round = 0;
 let groups = [
   [[0, 1], [2, 3]],
@@ -100,7 +101,7 @@ async function generatePoints(teams) {
       // atualiza o log da partida
       log(teamA.Name, teamAGoals, teamB.Name, teamBGoals, result);
       // espera 5 segundos para o resultado do próximo jogo
-      await timer(100);
+      await timer(msTimer);
       console.log("");
     }
   }
@@ -188,7 +189,7 @@ function nextPhase() {
   // aparece o botão para ir pra próxima parte
   document.getElementsByClassName("start-button")[0].style.display = "flex";
   document.getElementsByClassName("start-button")[0].innerHTML = "Finalizar fase de grupos";
-  document.getElementsByClassName("start-button")[0].onclick = function () { newTable() };
+  document.getElementsByClassName("start-button")[0].onclick = function () { newTable(nextPhaseTeams) };
 
   let nextPhaseTeams = [];
 
@@ -197,6 +198,15 @@ function nextPhase() {
     nextPhaseTeams.push([orderedTeams[i * 2][0], orderedTeams[(i * 2) + 1][1]]);
     nextPhaseTeams.push([orderedTeams[i * 2][1], orderedTeams[(i * 2) + 1][0]]);
   }
+
+  // reorganiza a ordem das equipes na array para ordenar a formação dos times
+  let nextPhaseTeamsOrganized = []
+  let temp = []
+  for (let i = 0; i < nextPhaseTeams.length; i += 2) {
+    nextPhaseTeamsOrganized.push(nextPhaseTeams[i]);
+    temp.push(nextPhaseTeams[i + 1]);
+  }
+  nextPhaseTeams = nextPhaseTeamsOrganized.concat(temp);
 
   console.log(nextPhaseTeams);
 }
