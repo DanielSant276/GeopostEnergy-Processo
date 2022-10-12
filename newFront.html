@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Copa 2022</title>
+  <!-- ícone da página -->
+  <link rel="icon" href="/img/favicon-16x16.ico" type="image/x-icon">
+  <!-- arquivos de css -->
+  <link rel="stylesheet" type="text/css" sizes="16x16" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="js/methods.js"></script>
+  <script src="js/generateGroups.js"></script>
+</head>
+
+<body class="background">
+  <!-- Parte da fase de grupos -->
+  <section class="group-phase">
+    <!-- Parte da tabela de pontuação -->
+    <section class="table-groups-points column">
+      <!-- Grupos A, B, C e D -->
+      <div class="row first-group">
+        <div id="a-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+          <!-- deixado apenas como exemplo de como está o html -->
+          <!-- <div class="team row">
+            <div class="team-flag-box">
+              <img class="team-image" src="./img/Suiça.svg">
+            </div>
+            <p class="team-name">Suiça</p>
+            <p class="team-points">0</p>
+            <p class="team-goals">0</p>
+          </div> -->
+        </div>
+
+        <div id="b-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO B</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+
+        <div id="c-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO C</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+
+        <div id="d-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO D</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grupos E, F, G e H -->
+      <div class="row first-group">
+        <div id="e-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO E</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+
+        <div id="f-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO F</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+
+        <div id="g-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO G</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+
+        <div id="h-group" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO H</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <div class="group-values">
+            <!-- esse espaço é só para centralizar em relação as pontuações abaixo -->
+            <div class="group-values-space"></div>
+            <p class="group-points">pontos</p>
+            <p class="group-goals">gols</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inicia a fase de grupos -->
+    <button class="provisorio">Iniciar jogos</button>
+
+    <!-- Parta da tabela de jogos -->
+    <section class="table-groups-games column">
+      <!-- Jogos dos grupos A, B, C e D -->
+      <div class="row first-group">
+        <div id="a-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+          <!-- deixado apenas como exemplo de como está o html -->
+          <!-- <div class="game-1 team row">
+            <div class="team-flag-box">
+              <img class="team-image" src="./img/Uruguai.svg">
+            </div>
+
+            <p class="team-goals">0</p>
+            <p class="team-goals">0</p>
+
+            <div class="team-flag-box">
+              <img class="team-image" src="./img/Uruguai.svg">
+            </div>
+          </div> -->
+        </div>
+
+        <div id="b-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+
+        <div id="c-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+
+        <div id="d-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+      </div>
+
+      <!-- Jogos dos grupos E, F, G e H -->
+      <div class="row first-group">
+        <div id="e-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+
+        <div id="f-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+
+        <div id="g-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+
+        <div id="h-match" class="group-box column">
+          <div class="group-header">
+            <h1 class="group-header-title">GRUPO A</h1>
+          </div>
+          <div class="group-header-shadow"></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- Parte das eliminatórias -->
+
+  <section>
+
+  </section>
+
+  <!-- <button onclick="console.log(teams)"></button> -->
+
+  <!-- <script src="js/groupPhase.js"></script>
+  <script src="js/knockouts.js"></script> -->
+</body>
+
+</html>
