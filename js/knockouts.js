@@ -4,6 +4,7 @@ let teamBPenalts = 0;
 
 // nextPhaseTeams
 function newTable(teams) {
+  // modifica a tabela para mostrar os jogos para a próxima etapa
   let groupsName = ["A", "B", "C", "D", "E", "F", "G", "H"];
   for (let i = 0; i < 8; i++) {
     var table = document.getElementsByClassName(groupsName[i])[0]
@@ -31,9 +32,8 @@ function newTable(teams) {
   document.getElementsByClassName("start-button")[0].onclick = function () { firstRound(teams) };
 }
 
-// inicia os rounds
+// inicia as oitavas de finais
 function firstRound(teams) {
-  // inicio das oitavas
   document.getElementsByClassName("start-button")[0].style.display = "none";
   document.getElementsByClassName("team-x")[0].style.display = "flex";
   document.getElementsByClassName("team-x")[1].style.display = "flex";
@@ -68,6 +68,8 @@ function finalRound(teams) {
   roundPoints(teams, 1)
 }
 
+// essa função faz sempre a computação das partidas, onde cada dois times se enfrentam e um deles é eliminado
+// parte de penaltis também foi implementada
 async function roundPoints(teams, matchs) {
   for (let i = 0; i < matchs; i++) {
     // os gols serão de 0 a 3 porém, é gerado um valor de 0 a 100, e caso seja sorteado um dos valores presentes nos
@@ -123,6 +125,7 @@ async function roundPoints(teams, matchs) {
     log(teamA.Name, teamAGoals, teamB.Name, teamBGoals, result);
     // espera 5 segundos para o resultado do próximo jogo
     await timer(msTimer);
+    // caso tenha dado empate, ocorre os penalts
     if (result == "drawn") {
       penalts(teams[i], teamA.Name, teamB.Name, matchs);
       await timer(msTimer);
@@ -144,7 +147,12 @@ async function roundPoints(teams, matchs) {
     }
     console.log("");
   }
+  // inicia a próxima fase
+  nextphase(teams, matchs);
+}
 
+// essa funcão identifica as fases e determina qual será a próxima
+function nextphase(teams, matchs) {
   if (matchs == 8) {
     adjustForSecondRound(adjustTeams(teams, matchs));
   }
@@ -159,18 +167,19 @@ async function roundPoints(teams, matchs) {
   }
 }
 
+// função geradora de pênaltis, é gerado um valor de 0 a 5
 function penalts(teams, teamA, teamB, matchs) {
   console.log("ocorreu pênalti");
   let teamAGoals = 0;
   let teamBGoals = 0;
 
   while (teamAGoals != teamBGoals) {
-    teamAGoals = Math.floor(Math.random() * 5);
-    teamBGoals = Math.floor(Math.random() * 5);
+    teamAGoals = Math.floor(Math.random() * 6);
+    teamBGoals = Math.floor(Math.random() * 6);
   }
 
+  // dependendo de quem fez mais pontos é gerado um vencedor
   let winner;
-
   if (teamAGoals > teamBGoals) {
     winner = teamA;
     teams.splice(1, 1);
@@ -180,6 +189,7 @@ function penalts(teams, teamA, teamB, matchs) {
     teams.splice(0, 1);
   }
 
+  // reorganiza o header do round para exibir que ocorreu um pênalti
   let roundText = document.getElementsByClassName("match-header")[0];
   if (matchs == 8) {
     roundText.innerHTML = "Oitavas - Pênalti";
@@ -196,9 +206,11 @@ function penalts(teams, teamA, teamB, matchs) {
     teamBPenalts = teamBGoals;
   }
 
+  // chama o log para demonstrar o balor dos pênaltis
   log(teamA, teamAGoals, teamB, teamBGoals, winner);
 }
 
+// ajusta as informações da tela para as quartas de finais
 function adjustForSecondRound(teams) {
   // modifica o texto do log
   let roundText = document.getElementsByClassName("match-header")[0];
@@ -218,6 +230,7 @@ function adjustForSecondRound(teams) {
   document.getElementsByClassName("start-button")[0].onclick = function () { secondRound(teams) };
 }
 
+// ajusta as informações da tela para as semifinais
 function adjustForSemiFinals(teams) {
   // modifica o texto do log
   let roundText = document.getElementsByClassName("match-header")[0];
@@ -237,6 +250,7 @@ function adjustForSemiFinals(teams) {
   document.getElementsByClassName("start-button")[0].onclick = function () { semifinalRound(teams) };
 }
 
+// ajusta as informações da tela para a final
 function adjustForFinal(teams) {
   // modifica o texto do log
   let roundText = document.getElementsByClassName("match-header")[0];
@@ -256,7 +270,7 @@ function adjustForFinal(teams) {
   document.getElementsByClassName("start-button")[0].onclick = function () { finalRound(teams) };
 }
 
-// configura os times para as quartas
+// configura os times com base no round atual
 function adjustTeams(teams, matchs) {
   console.log(teams);
   let nextPhaseTeams = [];

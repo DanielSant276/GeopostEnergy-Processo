@@ -5,7 +5,7 @@ function seeTeams() {
 
 // variáveis de tempo, controle de rodada, das equipes e os times ordenados
 const timer = ms => new Promise(res => setTimeout(res, ms));
-const msTimer = 10;
+const msTimer = 3000;
 let round = 0;
 let groups = [
   [[0, 1], [2, 3]],
