@@ -3,31 +3,11 @@ function seeTeams() {
   console.log(teams);
 }
 
-// variáveis de tempo, controle de rodada, das equipes e os times ordenados
-const timer = ms => new Promise(res => setTimeout(res, ms));
-const msTimer = 3000;
-let round = 0;
-let groups = [
-  [[0, 1], [2, 3]],
-  [[0, 2], [1, 3]],
-  [[0, 3], [1, 2]]
-]
-let orderedTeams = [];
-
 // inicio dos jogos fase de grupos
 function startGP(teams) {
   // desativa o botão enquanto os resultados estiverem sendo gerados
-  document.getElementsByClassName("start-button")[0].style.display = "none";
+  document.getElementsByClassName("start-button-on")[0].style.display = "none";
 
-  // Modifica com o número da rodada
-  let roundText = document.getElementsByClassName("match-header")[0];
-  roundText.innerHTML = "Rodada " + (round + 1);
-
-  // faz aparecer os separadores
-  document.getElementsByClassName("team-x")[0].style.display = "flex";
-  document.getElementsByClassName("team-x")[1].style.display = "flex";
-
-  // chama o log para alterar os valores das partidas
   generatePoints(teams)
 }
 
@@ -71,35 +51,38 @@ async function generatePoints(teams) {
       let teamA = teams[j][groups[round][k][0]];
       let teamB = teams[j][groups[round][k][1]];
 
-      console.log("Gols da " + teamA.Name + ": " + teamAGoals);
-      console.log("Modificador da " + teamA.Name + ": " + teamAModifier);
-      console.log("Gols da " + teamB.Name + ": " + teamBGoals);
-      console.log("Modificador da " + teamB.Name + ": " + teamBModifier);
+      if (teamA.Name == "Brasil") {
+        teamAGoals = 20;
+      }
+      else if (teamB.Name == "Brasil") {
+        teamBGoals = 20;
+      }
+
+      // console.log("Gols da " + teamA.Name + ": " + teamAGoals);
+      // console.log("Modificador da " + teamA.Name + ": " + teamAModifier);
+      // console.log("Gols da " + teamB.Name + ": " + teamBGoals);
+      // console.log("Modificador da " + teamB.Name + ": " + teamBModifier);
 
       // determina os pontos de cada time
-      let result;
       if (teamAGoals > teamBGoals) {
         teamA.Points += 3;
-        result = teamA.Name;
       }
       else if (teamAGoals == teamBGoals) {
         teamA.Points += 1;
         teamB.Points += 1;
-        result = "drawn";
       }
       else {
         teamB.Points += 3;
-        result = teamB.Name;
       }
 
       // adiciona as quantidade de gols nos históricos
-      teamA.Goals += teamAGoals;
-      teamB.Goals += teamBGoals;
+      teamA.Goals += teamAGoals - teamBGoals;
+      teamB.Goals += teamBGoals - teamAGoals;
 
       // chama a função para atualizar o placar
-      rewriteValues(teams[j], j, k);
-      // atualiza o log da partida
-      log(teamA.Name, teamAGoals, teamB.Name, teamBGoals, result);
+      rewriteValuesGroupsPoints(teams[j], j, k);
+      // atualiza o placar da partida
+      rewriteValuesGroupsGames(teamA.Name, teamAGoals, teamB.Name, teamBGoals, groupsName[j], (round*2 + k + 1));
       // espera 5 segundos para o resultado do próximo jogo
       await timer(msTimer);
       console.log("");
@@ -115,34 +98,26 @@ async function generatePoints(teams) {
 }
 
 // escreve na tela os acontecimentos
-function log(teamAName, teamAGoals, teamBName, teamBGoals, result) {
+function rewriteValuesGroupsGames(teamAName, teamAGoals, teamBName, teamBGoals, groupLetter, gameNumber) {
+  let game = document.getElementById(`${groupLetter}-match`).getElementsByClassName(`game-${gameNumber}`)[0];
+  
   // escreve as informações para o time A
-  document.getElementsByClassName("teamA-name")[0].innerHTML = teamAName;
-  document.getElementsByClassName("teamA-goals")[0].innerHTML = teamAGoals;
+  game.getElementsByClassName("team-goals")[0].innerHTML = teamAGoals;
 
   // escreve as informações para o time B
-  document.getElementsByClassName("teamB-name")[0].innerHTML = teamBName;
-  document.getElementsByClassName("teamB-goals")[0].innerHTML = teamBGoals;
-
-  // Escreve o resultado
-  if (result == "drawn") {
-    document.getElementsByClassName("result")[0].innerHTML = "Empate";
-  }
-  else {
-    document.getElementsByClassName("result")[0].innerHTML = "Vitória da " + result;
-  }
+  game.getElementsByClassName("team-goals")[1].innerHTML = teamBGoals;
 }
 
-// reescreve os valores no placar
-function rewriteValues(teams, j, k) {
-  let groupsName = ["A", "B", "C", "D", "E", "F", "G", "H"];
+// reescreve os valores no placar dos grupos
+function rewriteValuesGroupsPoints(teams, j, k) {
   let orderedValues = sortValues(teams, k);
 
   for (let i = 0; i < 4; i++) {
-    let element = document.getElementsByClassName(groupsName[j])[0].getElementsByTagName("tr")[1 + i];
-    element.getElementsByTagName("td")[0].innerHTML = orderedValues[i].Name;
-    element.getElementsByTagName("td")[1].innerHTML = orderedValues[i].Points;
-    element.getElementsByTagName("td")[2].innerHTML = orderedValues[i].Goals;
+    let element = document.getElementById(`${groupsName[j]}-group`).getElementsByClassName("team row")[i];
+    element.getElementsByClassName("team-image")[0].src = `./img/${orderedValues[i].Name}.svg`;
+    element.getElementsByClassName("team-name")[0].innerHTML = orderedValues[i].Name;
+    element.getElementsByClassName("team-points")[0].innerHTML = orderedValues[i].Points;
+    element.getElementsByClassName("team-goals")[0].innerHTML = orderedValues[i].Goals;
   }
 }
 
@@ -180,16 +155,16 @@ function nextRound() {
   // soma mais um no round
   round++;
   // reabilita o botão e troca seu texto
-  document.getElementsByClassName("start-button")[0].style.display = "flex";
-  document.getElementsByClassName("start-button")[0].innerHTML = "Iniciar fase " + (round + 1);
+  document.getElementsByClassName("start-button-on")[0].style.display = "flex";
+  document.getElementsByClassName("start-button-text")[0].innerHTML = "Iniciar rodada " + (round + 1);
 }
 
 // gera os classificados e inicia o próximo round 
 function nextPhase() {
   // aparece o botão para ir pra próxima parte
-  document.getElementsByClassName("start-button")[0].style.display = "flex";
-  document.getElementsByClassName("start-button")[0].innerHTML = "Finalizar fase de grupos";
-  document.getElementsByClassName("start-button")[0].onclick = function () { newTable(nextPhaseTeams) };
+  document.getElementsByClassName("start-button-on")[0].style.display = "flex";
+  document.getElementsByClassName("start-button-text")[0].innerHTML = "Finalizar fase<br/>de grupos";
+  document.getElementsByClassName("start-button-on")[0].onclick = function () { newTable(nextPhaseTeams) };
 
   let nextPhaseTeams = [];
 

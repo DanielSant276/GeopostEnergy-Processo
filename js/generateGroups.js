@@ -1,7 +1,4 @@
-// divide as equipes em 8 grupos
-let teams;
-// nome dos grupos
-let groupsName = ["a", "b", "c", "d", "e", "f", "g", "h"]
+
 
 async function divideTeams() {
   // recebe as informações das equipes
