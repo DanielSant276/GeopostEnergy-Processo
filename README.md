@@ -5,6 +5,8 @@ O projeto está divido em três branches: main, mvp e newFront.
 - A branch newFront foi a segunda já implementando a lógica em um front mais trabalhado.  
   
 ## Projeto  
+Nesse projeto não foi utilizado nenhum framework ou biblioteca pois eu queria demonstrar minha capacidade de desenvolvimento sem utilização de outras ferramentas.
+
 O projeto está divido em 4 pastas:  
 - css: responsável pelos estilos utilizados;  
 - img: responsável pelas imagens presente no site;  
