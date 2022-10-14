@@ -16,12 +16,12 @@ O projeto é composto por uma tela dividida em duas partes: fase de grupos e fas
 A primeira parte é a parte da fase de grupos onde as seleções se enfrentam em 3 rodadas com 2 jogos cada. No final, cada seleção terá enfrentado
 uma vez cada uma das outras seleções de seu grupo.  
 
-<img src="./readmeImagens/fase-de-grupos.png" />  
+<img src="./readmeImagens/Fase-de-grupos.png" />  
 
 A segunda fase é a fase de eliminatórias, onde as equipes irão se enfrentar em um mata mata. Os empates nessa fase são decididos com disputa de 
 pênaltis (valores entre parênteses).  
 
-<img src="./readmeImagens/fase-de-eliminatorias.png" />  
+<img src="./readmeImagens/Fase-de-eliminatorias.png" />  
 
 Quanto aos pênaltis foram implmentados as funções de continuar ocorrendo pênalti até que os times terminem com uma diferença de 1 ponto e terminar
 antes do final caso não seja mais possível para uma equipe ganhar.
