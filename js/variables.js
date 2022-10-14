@@ -6,7 +6,7 @@ let groupsName = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
 // controle de tempo
 const timer = ms => new Promise(res => setTimeout(res, ms));
-const msTimer = 10;
+const msTimer = 2000;
 
 // controle de rodada
 let round = 0;
