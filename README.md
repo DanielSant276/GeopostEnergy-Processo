@@ -1,6 +1,6 @@
 # Processo seletivo da vaga de estágio como desenvolvedor da Geopost Energy  - 2022  
 
-O projeto está divido em três branchs: main, mvp e newFront.  
+O projeto está divido em três branches: main, mvp e newFront.  
 - A branch mvp foi a primeira parte do projeto, onde apenas desenvolvi a lógica e utilizei um front básico para mostrar os valores na tela.
 - A branch newFront foi a segunda já implementando a lógica em um front mais trabalhado.  
   
@@ -11,7 +11,7 @@ O projeto está divido em 4 pastas:
 - js: lógica em javascript das funcionalidades;  
 - readmeImagens: imagens que serão utilizadas nesse README.  
 
-O projeto é composto por uma tela dividida em duas partes: fase de grupos e fas de eliminatórias.  
+O projeto é composto por uma tela dividida em duas partes: fase de grupos e fase de eliminatórias.  
 
 A primeira parte é a parte da fase de grupos onde as seleções se enfrentam em 3 rodadas com 2 jogos cada. No final, cada seleção terá enfrentado
 uma vez cada uma das outras seleções de seu grupo.  
@@ -23,8 +23,8 @@ pênaltis (valores entre parênteses).
 
 <img src="./readmeImagens/Fase-de-eliminatorias.png" />  
 
-Quanto aos pênaltis foram implmentados as funções de continuar ocorrendo pênalti até que os times terminem com uma diferença de 1 ponto e terminar
-antes do final caso não seja mais possível para uma equipe ganhar.
+Quanto aos pênaltis foram implementados duas funções: continuar ocorrendo pênalti até que os times terminem com uma diferença de 1 ponto; terminar
+antes do final caso não seja mais possível para uma das equipe ganhar.
 
 <img src="./readmeImagens/penalti-ultrapassando-limite.png" /> <img src="./readmeImagens/penalti-com-diferenca-de-3.png" />  
 
