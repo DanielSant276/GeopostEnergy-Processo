@@ -9,6 +9,8 @@
   <!-- arquivos de css -->
   <link rel="stylesheet" type="text/css" sizes="16x16" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/groupPhase.css">
+  <link rel="stylesheet" type="text/css" href="css/roundPhase.css">
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="js/methods.js"></script>
@@ -20,15 +22,17 @@
   <section class="group-phase">
     <!-- Parte da tabela de pontuação e header-->
     <section class="table-groups-points column">
-      <!-- Header do site, por falta de organização das posições ficou aqui para organizar melhor -->
+      <!-- Header do site, ficou aqui para organizar melhor a posição -->
       <section class="header">
-        <img src="./exemplos/test2.png" class="header-image" />
+        <img src="./img/logo.png" class="header-image" />
         <p class="qatar-font header-text">Copa do Mundo<br />Qatar 2022</p>
       </section>
 
+      <!-- Parte das tabelas -->
       <section class="column">
         <!-- Grupos A, B, C e D -->
         <div class="row first-group">
+          <!-- Grupo A -->
           <div id="a-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO A</h1>
@@ -51,6 +55,7 @@
             </div> -->
           </div>
 
+          <!-- Grupo B -->
           <div id="b-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO B</h1>
@@ -64,6 +69,7 @@
             </div>
           </div>
 
+          <!-- Grupo C -->
           <div id="c-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO C</h1>
@@ -77,6 +83,7 @@
             </div>
           </div>
 
+          <!-- Grupo D -->
           <div id="d-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO D</h1>
@@ -93,6 +100,7 @@
 
         <!-- Grupos E, F, G e H -->
         <div class="row first-group">
+          <!-- Grupo E -->
           <div id="e-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO E</h1>
@@ -106,6 +114,7 @@
             </div>
           </div>
 
+          <!-- Grupo F -->
           <div id="f-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO F</h1>
@@ -119,6 +128,7 @@
             </div>
           </div>
 
+          <!-- Grupo G -->
           <div id="g-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO G</h1>
@@ -132,6 +142,7 @@
             </div>
           </div>
 
+          <!-- Grupo H -->
           <div id="h-group" class="group-box column">
             <div class="group-header">
               <h1 class="group-header-title qatar-font">GRUPO H</h1>
@@ -148,7 +159,7 @@
       </section>
     </section>
 
-    <!-- Inicia a fase de grupos -->
+    <!-- Botões de controle da fase de grupos -->
     <section class="start-button-area column">
       <p class="qatar-font group-phase-text">Fase de Grupos</p>
       <div class="start-button-on link" onclick="startGP(teams)">
@@ -156,10 +167,11 @@
       </div>
     </section>
 
-    <!-- Parta da tabela de jogos -->
+    <!-- Parte da tabela de jogos -->
     <section class="table-groups-games column">
       <!-- Jogos dos grupos A, B, C e D -->
       <div class="row first-group">
+        <!-- Grupo A -->
         <div id="a-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO A</h1>
@@ -180,6 +192,7 @@
           </div> -->
         </div>
 
+        <!-- Grupo B -->
         <div id="b-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO B</h1>
@@ -187,6 +200,7 @@
           <div class="group-header-shadow"></div>
         </div>
 
+        <!-- Grupo C -->
         <div id="c-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO C</h1>
@@ -194,6 +208,7 @@
           <div class="group-header-shadow"></div>
         </div>
 
+        <!-- Grupo D -->
         <div id="d-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO D</h1>
@@ -204,6 +219,7 @@
 
       <!-- Jogos dos grupos E, F, G e H -->
       <div class="row first-group">
+        <!-- Grupo E -->
         <div id="e-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO E</h1>
@@ -211,6 +227,7 @@
           <div class="group-header-shadow"></div>
         </div>
 
+        <!-- Grupo F -->
         <div id="f-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO F</h1>
@@ -218,6 +235,7 @@
           <div class="group-header-shadow"></div>
         </div>
 
+        <!-- Grupo G -->
         <div id="g-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO G</h1>
@@ -225,6 +243,7 @@
           <div class="group-header-shadow"></div>
         </div>
 
+        <!-- Grupo H -->
         <div id="h-match" class="group-box column">
           <div class="group-header">
             <h1 class="group-header-title qatar-font">GRUPO H</h1>
@@ -251,13 +270,14 @@
       <!-- oitavas -->
       <div class="rounds-space round-one column">
         <div class="column space-bottom">
+          <!-- 1A com 2B -->
           <div class="round-boxes row">
-            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <!-- Placeholder para ver como fica depois -->
             <!-- <p class="round-boxes-text round-team-name">Brasil</p>
-            <p class="round-boxes-text round-team-goals">1(3)</p>
-            <p class="round-boxes-text round-team-goals">1(3)</p>
-            <p class="round-boxes-text round-team-name">Brasil</p> -->
+              <p class="round-boxes-text round-team-goals">1(3)</p>
+              <p class="round-boxes-text round-team-goals">1(3)</p>
+              <p class="round-boxes-text round-team-name">Brasil</p> -->
+            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
             <p class="round-boxes-text round-team-goals"></p>
             <p class="round-boxes-text round-team-goals"></p>
@@ -265,6 +285,7 @@
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
           </div>
 
+          <!-- 1C com 2D -->
           <div class="round-boxes row">
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
@@ -276,6 +297,7 @@
         </div>
 
         <div class="column space-bottom">
+          <!-- 1E com 2F -->
           <div class="round-boxes row">
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
@@ -285,26 +307,7 @@
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
           </div>
 
-          <div class="round-boxes row">
-            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
-            <p class="round-boxes-text round-team-name"></p>
-            <p class="round-boxes-text round-team-goals"></p>
-            <p class="round-boxes-text round-team-goals"></p>
-            <p class="round-boxes-text round-team-name"></p>
-            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
-          </div>
-        </div>
-
-        <div class="column space-bottom">
-          <div class="round-boxes row">
-            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
-            <p class="round-boxes-text round-team-name"></p>
-            <p class="round-boxes-text round-team-goals"></p>
-            <p class="round-boxes-text round-team-goals"></p>
-            <p class="round-boxes-text round-team-name"></p>
-            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
-          </div>
-
+          <!-- 1G com 2H -->
           <div class="round-boxes row">
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
@@ -316,6 +319,7 @@
         </div>
 
         <div class="column space-bottom">
+          <!-- 1H com 2G -->
           <div class="round-boxes row">
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
@@ -325,6 +329,7 @@
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
           </div>
 
+          <!-- 1F com 2E -->
           <div class="round-boxes row">
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
@@ -335,7 +340,29 @@
           </div>
         </div>
 
+        <div class="column space-bottom">
+          <!-- 1D com 2C -->
+          <div class="round-boxes row">
+            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
+            <p class="round-boxes-text round-team-name"></p>
+            <p class="round-boxes-text round-team-goals"></p>
+            <p class="round-boxes-text round-team-goals"></p>
+            <p class="round-boxes-text round-team-name"></p>
+            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
+          </div>
+
+          <!-- 1B com 2A -->
+          <div class="round-boxes row">
+            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
+            <p class="round-boxes-text round-team-name"></p>
+            <p class="round-boxes-text round-team-goals"></p>
+            <p class="round-boxes-text round-team-goals"></p>
+            <p class="round-boxes-text round-team-name"></p>
+            <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
+          </div>
+        </div>
       </div>
+
       <!-- quartas -->
       <div class="rounds-space quarter-round column">
         <div class="column space-bottom">
@@ -378,6 +405,7 @@
           </div>
         </div>
       </div>
+
       <!-- semifinais -->
       <div class="rounds-space semifinal-round column">
         <div class="column space-bottom">
@@ -400,6 +428,7 @@
           </div>
         </div>
       </div>
+
       <!-- final -->
       <div class="rounds-space final-round column">
         <div class="column space-bottom">
@@ -413,10 +442,11 @@
           </div>
         </div>
       </div>
+
       <!-- campão -->
       <div class="rounds-space champion column">
         <div class="column">
-          <div class="round-boxes row">
+          <div class="champion-box row">
             <img class="round-image-placeholher round-team-flag" src="./img/Brasil.svg" />
             <p class="round-boxes-text round-team-name"></p>
           </div>
@@ -430,7 +460,7 @@
 
   <script src="js/variables.js"></script>
   <script src="js/groupPhase.js"></script>
-  <!-- <script src="js/knockouts.js"></script> -->
+  <script src="js/knockouts.js"></script>
 </body>
 
 </html>

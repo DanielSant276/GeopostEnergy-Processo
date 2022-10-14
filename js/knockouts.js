@@ -1,76 +1,49 @@
-// variável para guardar valores de pênaltis nas finais
-let teamAPenalts = 0;
-let teamBPenalts = 0;
+// monta a tabela da fase de grupos
+function roundPhase(teams, divClass, matchs) {
+  // jogo o foco da visualização para a próxima parte
+  document.getElementsByClassName("start-button-on")[0].style.display = "none";
+  document.getElementsByClassName("round-phase")[0].scrollIntoView({ behavior: "smooth" });
 
-// nextPhaseTeams
-function newTable(teams) {
-  // modifica a tabela para mostrar os jogos para a próxima etapa
-  let groupsName = ["A", "B", "C", "D", "E", "F", "G", "H"];
-  for (let i = 0; i < 8; i++) {
-    var table = document.getElementsByClassName(groupsName[i])[0]
-    for (let j = 0; j < 2; j++) {
-      table.getElementsByTagName("th")[0].innerHTML = ""
-      table.getElementsByTagName("tr")[j + 1].getElementsByTagName("td")[0].innerHTML = teams[i][j].Name
-      table.getElementsByTagName("tr")[3].remove()
-    }
+  // posiciona as equipes nas posições específicas
+  var div = document.getElementsByClassName(divClass)[0];
+  for (let i = 0; i < matchs; i++) {
+    // seleciona a caixa
+    var box = div.getElementsByClassName("round-boxes")[i];
+
+    // arruma os valores da primeira seleção
+    box.getElementsByClassName("round-team-flag")[0].classList.remove("round-image-placeholher");
+    box.getElementsByClassName("round-team-flag")[0].src = `./img/${teams[i][0].Name}.svg`;
+    box.getElementsByClassName("round-team-name")[0].innerHTML = teams[i][0].Name;
+    box.getElementsByClassName("round-team-goals")[0].innerHTML = 0;
+
+    // arruma os valores da segunda seleção
+    box.getElementsByClassName("round-team-flag")[1].classList.remove("round-image-placeholher");
+    box.getElementsByClassName("round-team-flag")[1].src = `./img/${teams[i][1].Name}.svg`;
+    box.getElementsByClassName("round-team-name")[1].innerHTML = teams[i][1].Name;
+    box.getElementsByClassName("round-team-goals")[1].innerHTML = 0;
   }
 
-  // modifica o texto do log
-  let roundText = document.getElementsByClassName("match-header")[0];
-  roundText.innerHTML = "Oitavas";
-
-  document.getElementsByClassName("teamA-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamA-goals")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-goals")[0].innerHTML = "";
-  document.getElementsByClassName("team-x")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[1].style.display = "none";
-  document.getElementsByClassName("result")[0].innerHTML = "";
-
-  // iniciar oitavas
-  document.getElementsByClassName("start-button")[0].innerHTML = "Iniciar oitavas";
-  document.getElementsByClassName("start-button")[0].onclick = function () { firstRound(teams) };
-}
-
-// inicia as oitavas de finais
-function firstRound(teams) {
-  document.getElementsByClassName("start-button")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[0].style.display = "flex";
-  document.getElementsByClassName("team-x")[1].style.display = "flex";
-
-  roundPoints(teams, 8)
-}
-
-// inicia as quartas de finais
-function secondRound(teams) {
-  document.getElementsByClassName("start-button")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[0].style.display = "flex";
-  document.getElementsByClassName("team-x")[1].style.display = "flex";
-
-  roundPoints(teams, 4)
-}
-
-// inicia as semifinais
-function semifinalRound(teams) {
-  document.getElementsByClassName("start-button")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[0].style.display = "flex";
-  document.getElementsByClassName("team-x")[1].style.display = "flex";
-
-  roundPoints(teams, 2)
-}
-
-// inicia a final
-function finalRound(teams) {
-  document.getElementsByClassName("start-button")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[0].style.display = "flex";
-  document.getElementsByClassName("team-x")[1].style.display = "flex";
-
-  roundPoints(teams, 1)
+  if (matchs == 8) {
+    // inicia as oitavas de finais
+    roundPoints(teams, divClass, 8);
+  }
+  else if (matchs == 4) {
+    // inicia as quartas de finais
+    roundPoints(teams, divClass, 4);
+  }
+  else if (matchs == 2) {
+    // inicia as semifinais
+    roundPoints(teams, divClass, 2);
+  }
+  else {
+    // inicia a final
+    roundPoints(teams, divClass, 1);
+  }
 }
 
 // essa função faz sempre a computação das partidas, onde cada dois times se enfrentam e um deles é eliminado
 // parte de penaltis também foi implementada
-async function roundPoints(teams, matchs) {
+async function roundPoints(teams, divClass, matchs) {
   for (let i = 0; i < matchs; i++) {
     // os gols serão de 0 a 3 porém, é gerado um valor de 0 a 100, e caso seja sorteado um dos valores presentes nos
     // ifs abaixo, é adicionado determinada de quantia ao valor final, como se fosse uma sorte ou desempenho extra
@@ -99,175 +72,134 @@ async function roundPoints(teams, matchs) {
       teamBGoals += 1;
     }
 
-    let teamA = teams[i][0];
-    let teamB = teams[i][1];
-
-    console.log("Gols da " + teamA.Name + ": " + teamAGoals);
-    console.log("Modificador da " + teamA.Name + ": " + teamAModifier);
-    console.log("Gols da " + teamB.Name + ": " + teamBGoals);
-    console.log("Modificador da " + teamB.Name + ": " + teamBModifier);
-
-    // determina os pontos de cada time
-    let result;
-    if (teamAGoals > teamBGoals) {
-      teams[i].splice(1, 1);
-      result = teamA.Name;
+    // Easter egg Brasil X Alemanha
+    if (teams[i][0].Name == "Brasil" && teams[i][1].Name == "Alemanha") {
+      teamAGoals = 7;
+      teamBGoals = 1;
     }
-    else if (teamAGoals == teamBGoals) {
-      result = "drawn";
+    else if (teams[i][0].Name == "Alemanha" && teams[i][1].Name == "Brasil") {
+      teamAGoals = 1;
+      teamBGoals = 7;
+    }
+
+    // inicializa variável para penalts caso necessário
+    let teamAPenalts = 0;
+    let teamBPenalts = 0;
+    if (teamAGoals == teamBGoals) {
+      let result = penalts();
+      teamAPenalts = result[0];
+      teamBPenalts = result[1];
+
+      if (matchs == 1 && teamAPenalts > teamBPenalts) {
+        teamAFinalPenalts = teamAPenalts;
+        teamBFinalPenalts = teamBPenalts;
+      }
+      else if (matchs == 1 && teamBPenalts > teamAPenalts) {
+        teamAFinalPenalts = teamBPenalts;
+        teamBFinalPenalts = teamAPenalts;
+      }
+    }
+
+    // determina quem ganhou a partida
+    if (teamAGoals > teamBGoals || teamAPenalts > teamBPenalts) {
+      if (matchs == 1) {
+        fillDataObject(teams[i][0].Token, teams[i][1].Token, teamAGoals, teamBGoals);
+      }
+      teams[i].splice(1, 1);
     }
     else {
+      if (matchs == 1) {
+        fillDataObject(teams[i][1].Token, teams[i][0].Token, teamBGoals, teamAGoals);
+      }
       teams[i].splice(0, 1);
-      result = teamB.Name;
     }
 
-    // atualiza o log da partida
-    log(teamA.Name, teamAGoals, teamB.Name, teamBGoals, result);
     // espera 5 segundos para o resultado do próximo jogo
     await timer(msTimer);
-    // caso tenha dado empate, ocorre os penalts
-    if (result == "drawn") {
-      penalts(teams[i], teamA.Name, teamB.Name, matchs);
-      await timer(msTimer);
+
+    // reajusta o placar
+    adjustTable(i, divClass, teamAGoals, teamBGoals, teamAPenalts, teamBPenalts);
+  }
+
+  nextphase(teams, matchs);
+}
+
+// função geradora de pênaltis, é gerado um valor de 0 a 5
+function penalts() {
+  console.log("ocorreu pênalti");
+  let teamAGoals = 0;
+  let teamBGoals = 0;
+
+  // enquanto os valores forem iguais, é gerado novamente uma pontuação
+  for (let i = 0; i < 5; i++) {
+    // gera um chance de acerto para a e para b
+    let goalChanceA = Math.floor(Math.random() * 100) + 1
+    let goalChanceB = Math.floor(Math.random() * 100) + 1
+
+    // se o valor gerado para A for maior que 50 A marca gol
+    if (goalChanceA > 51) {
+      teamAGoals++;
     }
 
-    // reajusta a indicação da rodada que está acontecendo
-    let roundText = document.getElementsByClassName("match-header")[0];
-    if (matchs == 8) {
-      roundText.innerHTML = "Oitavas";
-    }
-    else if (matchs == 4) {
-      roundText.innerHTML = "Quartas";
-    }
-    else if (matchs == 2) {
-      roundText.innerHTML = "Semifinais";
+    // se caso a seleção A não tiver marcado e a seleção B possuir mais gols, a seleção B não precisa jogar novamente
+    if (teamAGoals < teamBGoals && i == 4) {
+      console.log("terminado antes");
+      break;
     }
     else {
-      roundText.innerHTML = "Final";
+      // se o valor gerado para B for maior que 50 B marca gol
+      if (goalChanceB > 51) {
+        teamBGoals++;
+      }
     }
-    console.log("");
+
+    // Se a diferença entre os dois time for maior que 3 o loop acaba
+    if (teamAGoals - teamBGoals == 3 || teamBGoals - teamAGoals == 3) {
+      console.log("diferença de 3");
+
+      break;
+    }
+
+    // Se os dois times empatarem no final, é gerado mais um loop para desempate
+    if (i == 4 && teamAGoals == teamBGoals) {
+      i--;
+    }
   }
-  // inicia a próxima fase
-  nextphase(teams, matchs);
+
+  return [teamAGoals, teamBGoals]
+}
+
+// Ajusta as pontuações na tabela
+function adjustTable(i, divClass, teamAGoals, teamBGoals, teamAPenalts, teamBPenalts) {
+  // posiciona as equipes nas posições específicas
+  var div = document.getElementsByClassName(divClass)[0];
+  var box = div.getElementsByClassName("round-boxes")[i];
+
+  // insere o resultado dos gols
+  if (teamAPenalts != 0 || teamBPenalts != 0) {
+    box.getElementsByClassName("round-team-goals")[0].innerHTML = `${teamAGoals} (${teamAPenalts})`;
+    box.getElementsByClassName("round-team-goals")[1].innerHTML = `${teamBGoals} (${teamBPenalts})`;
+  }
+  else {
+    box.getElementsByClassName("round-team-goals")[0].innerHTML = teamAGoals;
+    box.getElementsByClassName("round-team-goals")[1].innerHTML = teamBGoals;
+  }
 }
 
 // essa funcão identifica as fases e determina qual será a próxima
 function nextphase(teams, matchs) {
   if (matchs == 8) {
-    adjustForSecondRound(adjustTeams(teams, matchs));
+    roundPhase(adjustTeams(teams, matchs), "quarter-round", 4);
   }
   else if (matchs == 4) {
-    adjustForSemiFinals(adjustTeams(teams, matchs));
+    roundPhase(adjustTeams(teams, matchs), "semifinal-round ", 2);
   }
   else if (matchs == 2) {
-    adjustForFinal(adjustTeams(teams, matchs));
+    roundPhase(adjustTeams(teams, matchs), "final-round", 1);
   }
   else {
     finishCup(teams);
   }
-}
-
-// função geradora de pênaltis, é gerado um valor de 0 a 5
-function penalts(teams, teamA, teamB, matchs) {
-  console.log("ocorreu pênalti");
-  let teamAGoals = 0;
-  let teamBGoals = 0;
-
-  while (teamAGoals != teamBGoals) {
-    teamAGoals = Math.floor(Math.random() * 6);
-    teamBGoals = Math.floor(Math.random() * 6);
-  }
-
-  // dependendo de quem fez mais pontos é gerado um vencedor
-  let winner;
-  if (teamAGoals > teamBGoals) {
-    winner = teamA;
-    teams.splice(1, 1);
-  }
-  else {
-    winner = teamB;
-    teams.splice(0, 1);
-  }
-
-  // reorganiza o header do round para exibir que ocorreu um pênalti
-  let roundText = document.getElementsByClassName("match-header")[0];
-  if (matchs == 8) {
-    roundText.innerHTML = "Oitavas - Pênalti";
-  }
-  else if (matchs == 4) {
-    roundText.innerHTML = "Quartas - Pênalti";
-  }
-  else if (matchs == 2) {
-    roundText.innerHTML = "Semifinais - Pênalti";
-  }
-  else {
-    roundText.innerHTML = "final - Pênalti";
-    teamAPenalts = teamAGoals;
-    teamBPenalts = teamBGoals;
-  }
-
-  // chama o log para demonstrar o balor dos pênaltis
-  log(teamA, teamAGoals, teamB, teamBGoals, winner);
-}
-
-// ajusta as informações da tela para as quartas de finais
-function adjustForSecondRound(teams) {
-  // modifica o texto do log
-  let roundText = document.getElementsByClassName("match-header")[0];
-  roundText.innerHTML = "Quartas";
-
-  document.getElementsByClassName("teamA-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamA-goals")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-goals")[0].innerHTML = "";
-  document.getElementsByClassName("team-x")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[1].style.display = "none";
-  document.getElementsByClassName("result")[0].innerHTML = "";
-  document.getElementsByClassName("start-button")[0].style.display = "flex";
-
-  // iniciar quartas
-  document.getElementsByClassName("start-button")[0].innerHTML = "Iniciar quartas";
-  document.getElementsByClassName("start-button")[0].onclick = function () { secondRound(teams) };
-}
-
-// ajusta as informações da tela para as semifinais
-function adjustForSemiFinals(teams) {
-  // modifica o texto do log
-  let roundText = document.getElementsByClassName("match-header")[0];
-  roundText.innerHTML = "Semifinais";
-
-  document.getElementsByClassName("teamA-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamA-goals")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-goals")[0].innerHTML = "";
-  document.getElementsByClassName("team-x")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[1].style.display = "none";
-  document.getElementsByClassName("result")[0].innerHTML = "";
-  document.getElementsByClassName("start-button")[0].style.display = "flex";
-
-  // iniciar quartas
-  document.getElementsByClassName("start-button")[0].innerHTML = "Iniciar Semifinais";
-  document.getElementsByClassName("start-button")[0].onclick = function () { semifinalRound(teams) };
-}
-
-// ajusta as informações da tela para a final
-function adjustForFinal(teams) {
-  // modifica o texto do log
-  let roundText = document.getElementsByClassName("match-header")[0];
-  roundText.innerHTML = "Final";
-
-  document.getElementsByClassName("teamA-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamA-goals")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-goals")[0].innerHTML = "";
-  document.getElementsByClassName("team-x")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[1].style.display = "none";
-  document.getElementsByClassName("result")[0].innerHTML = "";
-  document.getElementsByClassName("start-button")[0].style.display = "flex";
-
-  // iniciar quartas
-  document.getElementsByClassName("start-button")[0].innerHTML = "Iniciar Final";
-  document.getElementsByClassName("start-button")[0].onclick = function () { finalRound(teams) };
 }
 
 // configura os times com base no round atual
@@ -285,16 +217,23 @@ function adjustTeams(teams, matchs) {
 
 // finaliza a competição
 function finishCup(teams) {
-  console.log(teams);
-  // modifica o texto do log
-  let roundText = document.getElementsByClassName("match-header")[0];
-  roundText.innerHTML = "A campeão da Copa do mundo de 2022 é " + teams[0][0].Name;
+  // posiciona as equipes nas posições específicas
+  var championBox = document.getElementsByClassName("champion-box")[0];
 
-  document.getElementsByClassName("teamA-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamA-goals")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-name")[0].innerHTML = "";
-  document.getElementsByClassName("teamB-goals")[0].innerHTML = "";
-  document.getElementsByClassName("team-x")[0].style.display = "none";
-  document.getElementsByClassName("team-x")[1].style.display = "none";
-  document.getElementsByClassName("result")[0].innerHTML = "";
+  // arruma os valores da primeira seleção
+  championBox.getElementsByClassName("round-team-flag")[0].classList.remove("round-image-placeholher");
+  championBox.getElementsByClassName("round-team-flag")[0].src = `./img/${teams[0][0].Name}.svg`;
+  championBox.getElementsByClassName("round-team-name")[0].innerHTML = teams[0][0].Name;
+
+  post(data);
+}
+
+// preenche com os vencedores da última rodada
+function fillDataObject(teamA, teamB, teamAGoals, teamBGoals) {
+  data["equipeA"] = teamA;
+  data["equipeB"] = teamB;
+  data["golsEquipeA"] = teamAGoals;
+  data["golsEquipeB"] = teamBGoals;
+  data["golsPenaltyTimeA"] = teamAFinalPenalts;
+  data["golsPenaltyTimeB"] = teamBFinalPenalts;
 }

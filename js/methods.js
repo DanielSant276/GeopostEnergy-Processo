@@ -9,7 +9,6 @@ async function get() {
     method: "GET",
     headers: { "git-user": gitUser },
     success: function (data) {
-      // console.log(data);
       teams = data;
     },
     error: function (error) {
@@ -21,25 +20,25 @@ async function get() {
 }
 
 // Faz uma requisição HTTP POST
-async function post() {
+async function post(data) {
   let url = "https://estagio.geopostenergy.com/WorldCup/InsertFinalResult";
   let gitUser = "DanielSant276";
-  let response = {
-    "equipeA": "",
-    "equipeB": "",
-    "golsEquipeA": "",
-    "golsEquipeB": "",
-    "golsPenaltyTimeA": "",
-    "golsPenaltyTimeB": ""
-  }
+  let response = data;
+
+  console.log(response);
 
   await $.ajax({
     url: url,
     method: "POST",
     headers: { "git-user": gitUser },
-    Response: response,
+    data: JSON.stringify(data),
+    success: function (data) {
+      console.log(data);
+    },
     error: function (error) {
       console.log(error);
-    }
+    },
+    contentType: "application/json",
+    dataType: 'json'
   });
 }

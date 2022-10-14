@@ -20,3 +20,17 @@ let groups = [
 
 // times ordenados
 let orderedTeams = [];
+
+// variável para guardar valores de pênaltis na final
+let teamAFinalPenalts = 0;
+let teamBFinalPenalts = 0;
+
+// objeto para enviar no final
+let data = {
+  "equipeA": "",
+  "equipeB": "",
+  "golsEquipeA": "",
+  "golsEquipeB": "",
+  "golsPenaltyTimeA": "",
+  "golsPenaltyTimeB": ""
+}

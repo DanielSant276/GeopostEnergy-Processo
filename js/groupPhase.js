@@ -51,17 +51,15 @@ async function generatePoints(teams) {
       let teamA = teams[j][groups[round][k][0]];
       let teamB = teams[j][groups[round][k][1]];
 
-      if (teamA.Name == "Brasil") {
-        teamAGoals = 20;
+      // Easter egg Brasil X Alemanha
+      if (teamA.Name == "Brasil" && teamB.Name == "Alemanha") {
+        teamAGoals = 7;
+        teamBGoals = 1;
       }
-      else if (teamB.Name == "Brasil") {
-        teamBGoals = 20;
+      else if (teamA.Name == "Alemanha" && teamB.Name == "Brasil") {
+        teamAGoals = 1;
+        teamBGoals = 7;
       }
-
-      // console.log("Gols da " + teamA.Name + ": " + teamAGoals);
-      // console.log("Modificador da " + teamA.Name + ": " + teamAModifier);
-      // console.log("Gols da " + teamB.Name + ": " + teamBGoals);
-      // console.log("Modificador da " + teamB.Name + ": " + teamBModifier);
 
       // determina os pontos de cada time
       if (teamAGoals > teamBGoals) {
@@ -82,10 +80,9 @@ async function generatePoints(teams) {
       // chama a função para atualizar o placar
       rewriteValuesGroupsPoints(teams[j], j, k);
       // atualiza o placar da partida
-      rewriteValuesGroupsGames(teamA.Name, teamAGoals, teamB.Name, teamBGoals, groupsName[j], (round*2 + k + 1));
+      rewriteValuesGroupsGames(teamA.Name, teamAGoals, teamB.Name, teamBGoals, groupsName[j], (round * 2 + k + 1));
       // espera 5 segundos para o resultado do próximo jogo
       await timer(msTimer);
-      console.log("");
     }
   }
 
@@ -100,7 +97,7 @@ async function generatePoints(teams) {
 // escreve na tela os acontecimentos
 function rewriteValuesGroupsGames(teamAName, teamAGoals, teamBName, teamBGoals, groupLetter, gameNumber) {
   let game = document.getElementById(`${groupLetter}-match`).getElementsByClassName(`game-${gameNumber}`)[0];
-  
+
   // escreve as informações para o time A
   game.getElementsByClassName("team-goals")[0].innerHTML = teamAGoals;
 
@@ -164,7 +161,7 @@ function nextPhase() {
   // aparece o botão para ir pra próxima parte
   document.getElementsByClassName("start-button-on")[0].style.display = "flex";
   document.getElementsByClassName("start-button-text")[0].innerHTML = "Finalizar fase<br/>de grupos";
-  document.getElementsByClassName("start-button-on")[0].onclick = function () { newTable(nextPhaseTeams) };
+  document.getElementsByClassName("start-button-on")[0].onclick = function () { roundPhase(nextPhaseTeams, "round-one", 8) };
 
   let nextPhaseTeams = [];
 

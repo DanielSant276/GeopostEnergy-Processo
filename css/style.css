@@ -1,6 +1,11 @@
+/* fonte da copa utilizada nas partes importantes */
 @font-face {
   font-family: 'Qatar-Font';
   src: url('./Qatar2022/Qatar2022Arabic-Bold.ttf') format('truetype')
+}
+
+.qatar-font {
+  font-family: "Qatar-Font";
 }
 
 /* apenas para desativar o que eu já fiz */
@@ -8,6 +13,7 @@
   display: none;
 }
 
+/* para o botão ficar como clicável */
 .link {
   text-decoration: none;
 }
@@ -16,35 +22,16 @@
   cursor: pointer;
 }
 
+/* deixa em forma de linha */
 .row {
   flex-direction: row;
 }
 
+/* deixa em forma de coluna */
 .column {
   flex-direction: column;
 }
 
-.align-center {
-  align-items: center;
-  width: 120px;
-}
-
-.match-header {
-  text-align: center;
-}
-
-.div-log {
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  left: 20%;
-}
-
-.team-x {
-  display: none;
-}
-
-/* Novos estilos */
 /* cores da copa */
 :root {
   --wine: #260112;
@@ -54,6 +41,7 @@
   --white: #F2F2F2
 }
 
+/* gradiente utilizado no fundo */
 .background {
   background: rgb(163, 15, 56);
   background: linear-gradient(135deg, rgba(163, 15, 56, 1) 0%, rgba(30, 1, 10, 1) 100%);
@@ -61,235 +49,4 @@
   background-repeat: no-repeat;
   background-position: center;
   height: 100%;
-}
-
-.group-phase {
-  width: 100%;
-  align-items: center;
-  margin-bottom: 70px;
-}
-
-.table-groups-points, .table-groups-games {
-  width: 45%;
-}
-
-.header {
-  justify-content: center;
-  align-items: center;
-}
-
-.qatar-font {
-  font-family: "Qatar-Font";
-}
-
-.header-image {
-  width: 50px;
-  height: fit-content;
-  margin-right: 30px;
-}
-
-.header-text {
-  font-size: 60px;
-  text-align: center;
-  color: var(--white);
-}
-
-.first-group, .second-group {
-  margin-top: 30px;
-  justify-content: space-around;
-}
-
-.group-box {
-  width: 130px;
-  border-radius: 20px;
-  background-color: var(--white);
-}
-
-.group-header {
-  background-color: var(--pinkDark);
-  border-radius: 19px 19px 0px 0px;
-  padding: 15px 0px;
-  justify-content: center;
-  z-index: 2;
-}
-
-.group-header-shadow {
-  width: 95%;
-  height: 20px;
-  background-color: #000000;
-  opacity: 70%;
-  filter: blur(10px);
-  margin-top: -15px;
-  z-index: 1;
-  align-self: center;
-}
-
-.group-values {
-  justify-content: center;
-  align-items: center;
-}
-
-.group-values-space {
-  width: 74px;
-  text-align: center;
-}
-
-.group-points, .group-goals {
-  width: 20%;
-  font-size: 10px;
-  text-align: center;
-}
-
-.group-header-title {
-  font-size: 20px;
-  color: var(--white);
-}
-
-.team {
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-}
-
-.team-flag-box {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: #000;
-  /* border: 1px black solid; */
-}
-
-.team-image {
-  object-fit: cover;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.team-name {
-  width: 40%;
-  text-align: center;
-  font-size: 13px;
-}
-
-.team-points, .team-goals {
-  width: 20%;
-  text-align: center;
-}
-
-/* parte do meio da tela */
-.group-phase-text {
-  color: var(--white);
-  font-size: 25px;
-  text-align: center;
-  position: relative;
-  bottom: 50px;
-}
-
-.start-button-area {
-  width: 10%;
-}
-
-.start-button-on {
-  border-radius: 20px;
-  width: 100%;
-  height: 60px;
-  align-content: center;
-  background-color: var(--pinkDark);
-  align-items: center;
-  justify-content: center;
-  -webkit-box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0.5);
-}
-
-.start-button-off {
-  display: none;
-}
-
-.start-button-text {
-  color: var(--white);
-  font-size: 15px;
-  text-align: center;
-}
-
-.round-phase {
-  margin-bottom: 150px;
-}
-
-.rounds-margin {
-  padding-left: 2%;
-  padding-right: 2%;
-}
-
-.rounds-title-text {
-  color: var(--white);
-  font-size: 20px;
-}
-
-.rounds-space {
-  margin-top: 20px;
-  width: 20%;
-  justify-content: space-around;
-}
-
-.round-boxes {
-  width: 95%;
-  background-color: var(--white);
-  justify-content: space-around;
-  padding: 10px 0;
-  border-radius: 15px;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.round-image, .placeholher {
-  width: 35px;
-}
-
-.round-image-placeholher {
-  filter: contrast(100%) brightness(0%);
-  opacity: 30%;
-}
-
-.round-penalty {
-  position: relative;
-  top: 50px;
-}
-
-.space-bottom {
-  margin-bottom: 30px;
-}
-
-.round-boxes-text {
-  font-size: 14px;
-  text-align: center;
-}
-
-.round-team-flag {
-  width: 15%;
-}
-
-.round-team-name {
-  width: 15%;
-}
-
-.round-team-goals {
-  width: 10%;
-}
-
-.champion {
-  align-items: center;
-}
-
-.cup-winner {
-  width: 120px;
-  margin-bottom: -35px;
-}
-
-.champion .round-boxes {
-  margin-bottom: 40px;
-}
-
-.champion div{
-  align-items: center;
 }
