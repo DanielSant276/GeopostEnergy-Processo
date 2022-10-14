@@ -23,8 +23,9 @@ pênaltis (valores entre parênteses).
 
 <img src="./readmeImagens/Fase-de-eliminatorias.png" />  
 
-Quanto aos pênaltis foram implementados duas funções: continuar ocorrendo pênalti até que os times terminem com uma diferença de 1 ponto; terminar
-antes do final caso não seja mais possível para uma das equipe ganhar.
+Quanto aos pênaltis foram implementados duas funções:  
+- continuar ocorrendo pênalti até que os times terminem com uma diferença de 1 ponto;  
+- terminar antes do final caso não seja mais possível para uma das equipe ganhar.  
 
 <img src="./readmeImagens/penalti-ultrapassando-limite.png" /> <img src="./readmeImagens/penalti-com-diferenca-de-3.png" />  
 
